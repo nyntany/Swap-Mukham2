@@ -1,0 +1,6 @@
+gradio>=3.40
+numpy>=1.25.2
+onnx
+onnxruntime-gpu
+opencv-python>=4.7.0.72
+opencv-python-headless>=4.7.0.72
