@@ -29,7 +29,8 @@ cv_reader_lock = threading.Lock()
 parser = argparse.ArgumentParser(description="Swap-Mukham Face Swapper")
 parser.add_argument("--out_dir", help="Default Output directory", default=os.getcwd())
 parser.add_argument("--max_threads", type=int, help="Max num of threads to use", default=2)
-parser.add_argument("--colab", action="store_true", help="Colab mode", default=False)
+parser.add_argument("--colab", action="store_true", help="Enable Colab mode", default=False)
+parser.add_argument("--cuda", action="store_true", help="Enable cuda", default=False)
 parser.add_argument("--cpu", action="store_true", help="Enable cpu mode", default=False)
 parser.add_argument("--autolaunch", help="Auto start in browser", default=False, action="store_true")
 parser.add_argument("--fp16", help="Use fp16 model Inswapper", default=False, action="store_true")
@@ -65,14 +66,14 @@ from utils.io import (
     add_datetime_to_filename,
 )
 
-gr.processing_utils.encode_pil_to_base64 = fast_pil_encode
-gr.processing_utils.encode_array_to_base64 = fast_numpy_encode
+processing_utils.encode_pil_to_base64 = fast_pil_encode
+processing_utils.encode_array_to_base64 = fast_numpy_encode
 
 dp.set_fp16(user_args.fp16)
 
-gv.USE_COLAB = user_args.colab
-gv.MAX_THREADS = user_args.max_threads
-gv.DEFAULT_OUTPUT_PATH = user_args.out_dir
+USE_COLAB = user_args.colab
+MAX_THREADS = user_args.max_threads
+DEFAULT_OUTPUT_PATH = user_args.out_dir
 
 PREFER_TEXT_WIDGET = user_args.prefer_text_widget
 
@@ -1121,7 +1122,7 @@ folder = 'tmp/gradio'  # Замените на ваш путь к папке
 clear_temp_folder(folder)
 
 if __name__ == "__main__":
-    if gv.USE_COLAB:
+    if USE_COLAB:
         print("Running in colab mode")
 
     interface.queue(concurrency_count=2, max_size=20).launch(share=gv.USE_COLAB,inbrowser=user_args.autolaunch)
