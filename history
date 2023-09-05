@@ -1,0 +1,16 @@
+
+# 2023-08-28 21:32:06.191874
++Как мне сделать чтобы если был --fp16 то INSWAPPER_PATH = "./assets/pretrained_models/inswapper_128.onnx" иначе INSWAPPER_PATH = "./assets/pretrained_models/inswapper_128.fp16.onnx"
+
+# 2023-08-28 21:33:08.628496
++INSWAPPER_PATH = (
++    "./assets/pretrained_models/inswapper_128.onnx"
++    if user_args.fp16
++    else "./assets/pretrained_models/inswapper_128.fp16.onnx"
++)
+
+# 2023-08-28 21:33:48.693033
++user_args" не определен
+
+# 2023-08-28 21:36:22.574514
++но user_args указываетсчя в app.py
